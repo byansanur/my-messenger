@@ -1,9 +1,12 @@
 package com.byandev.mymessenger.Message
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.byandev.mymessenger.LoginRegister.User
+import com.byandev.mymessenger.Chat.ChatActivity
+import com.byandev.mymessenger.Model.User
+import com.byandev.mymessenger.Model.UserItem
 import com.byandev.mymessenger.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,15 +26,12 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_message)
 
         supportActionBar?.title = "Select User"
-//
-//        val adapter = GroupAdapter<ViewHolder>()
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-//
-//        recyclerViewMessage.adapter = adapter
 
         fetchUser()
+    }
+
+    companion object {
+        val USER_KEY = "USER_KEY"
     }
 
     private fun fetchUser() {
@@ -47,6 +47,17 @@ class NewMessageActivity : AppCompatActivity() {
                     }
                 }
                 recyclerViewMessage.adapter = adapter
+                adapter.setOnItemClickListener{
+                    item, view ->
+
+                    val userItem = item as UserItem
+
+                    val intent = Intent(view.context, ChatActivity::class.java)
+//                    intent.putExtra(USER_KEY, userItem.user.username)
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
+                    finish()
+                }
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -56,15 +67,5 @@ class NewMessageActivity : AppCompatActivity() {
     }
 }
 
-class UserItem(val user: User): Item<ViewHolder>() {
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textViewUserName.text = user.username
 
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.imageViewUser)
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.item_user
-    }
-}
 

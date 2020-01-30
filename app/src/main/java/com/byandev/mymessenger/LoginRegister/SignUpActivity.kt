@@ -6,14 +6,17 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.byandev.mymessenger.Message.MessageActivity
+import com.byandev.mymessenger.Model.User
 import com.byandev.mymessenger.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.util.*
 
@@ -129,6 +132,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 }
 
-class User(val uid: String, val username: String, val profileImageUrl: String) {
-    constructor(): this("","","")
-}
+//@Parcelize
+//class User(val uid: String, val username: String, val profileImageUrl: String): Parcelable {
+//    constructor(): this("","","")
+//}
