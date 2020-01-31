@@ -8,6 +8,10 @@ apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.firebase.crashlytics'
+
+apply plugin: 'com.google.firebase.firebase-perf'
+
 androidExtensions {
     experimental = true
 }
@@ -49,6 +53,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
+    implementation 'com.google.firebase:firebase-perf:19.0.5'
 
     // circle image
     implementation 'de.hdodenhof:circleimageview:2.1.0'
